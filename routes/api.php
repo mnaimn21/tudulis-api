@@ -21,8 +21,8 @@ use App\Http\Controllers\TodoController;
 
 
 Route::post("/register", [UserController::class,"register"]);
-Route::post("/login", [UserController::class,"login"]);
-Route::post("/logout", [UserController::class,"logout"]);
+Route::post("/login", [UserController::class,"login"])->name('login');
+
 
 
 Route::group(['middleware'=>'auth:sanctum'], function(){
@@ -34,4 +34,10 @@ Route::group(['middleware'=>'auth:sanctum'], function(){
 
     Route::resource('/todos', TodoController::class);
     Route::put('/update_completion/{id}', [TodoController::class,"toggleTaskCompletion"]);
+    Route::post("/logout", [UserController::class,"logout"]);
+
+    Route::get("/account", [UserController::class,"myAccount"]);
+
+
+
 });

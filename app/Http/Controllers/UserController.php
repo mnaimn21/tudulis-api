@@ -63,24 +63,25 @@ class UserController extends Controller
     }
 
     public function logout (){
-        $isAuth = Auth::check();
+        Auth::user()->currentAccessToken()->delete();
 
-        // if (!$isAuth){
-        //     return([
-        //         "success" => false,
-        //         "message" => "You are not even login, how can you logout",
-        //         "data" => null
-        //     ]);
-        // }
-
-        Auth::logout();
-
-        return([
+        return(
+            response()->json([
             "success" => true,
             "message" => "Successfully logout",
             "data" => null
+        ]));
+    }
 
-        ]);
+    public function myAccount(){
+            return(
+                response()->json([
+                "success" => true,
+                "message" => "test",
+                "data" => Auth::user()
+            ]));
+        
+        
     }
 }
 
